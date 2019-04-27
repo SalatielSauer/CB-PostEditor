@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<title>Cube BR - Editor de Postagens</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	</head>
+
+	<body style="background-color: #0f2229";>
+		<script src="posteditor.js"></script>
+		
+		<dialog class="previewpost">
+			<p>Houve um problema, atualize a página</p>
+		</dialog>
+		
+		<dialog class="propmenu">
+			<button onclick="propmenus(0)">Fechar</button>
+			<center>
+				<h3 class="propTitle">Carregando...</h3>
+			</center>
+				<div class="propContent"><p>Carregando...</p></div>
+			
+		</dialog>
+		<div class="postoptions">
+			<button onclick="savePost()"><i class="fas fa-save"></i> Salvar</button>
+			<button onclick="previewpost(1)"><i class="fas fa-eye"></i> Visualizar</button>
+			<button onclick="limparPost()"><i class="fas fa-trash"></i> Limpar</button>
+		</div>
+		<div class="editoroptions">
+			<button onclick="addtitulo()"><i class="fas fa-heading"></i> Titulo</button>
+			<button onclick="addparagrafo()"><i class="fas fa-paragraph"></i> Páragrafo</button>
+			<button onclick="addimagem()"><i class="fas fa-image"></i> Imagem</button>
+			<button onclick="addvideo(0)"><i class="fas fa-video"></i> Vídeo</button>
+			<button onclick="addlista()"><i class="fas fa-list"></i> Lista</button>
+			<button onclick="addbloco()"><i class="fas fa-th-large"></i> Bloco</button>
+		</div>
+		
+		<textarea onkeydown="insertTab(this, event);" class="editorarea" spellcheck="false" autofocus="autofocus" tabindex="1" name="text" rows="20" wrap="off">
+<!-- Guia de exemplo, clique em Visualizar ou Limpar -->
+<h3 class="Ptitulo">Olá Mundo</h3>
+<p class="Ptexto">
+	Fiz esse editor de textos para facilitar a criação de postagens para o Cube BR.
+	<br>
+	Embora não seja 100% visual, ele adiciona apenas o necessário para a postagem, sem problemas com tags indesejaveis.
+</p>
+<br>
+<p class="Ptexto">Você pode adicionar páragrafos como esse, ou listas:</p>
+<ul class="Ullista">
+	<li>Adicione quantos itens quiser</li>
+	<li>Basta duplicar as tags!</li>
+	<li>As tags já são adicionadas com as classes certas</li>
+</ul>
+<h3 class="Ptitulo">Titulos, Vídeos e Imagens também!</h3>
+<br>
+<center>
+	<iframe class="Pvideo" src="https://www.youtube.com/embed/0iIzZgwPvpk" frameborder="0" allowfullscreen></iframe>
+	<img class="Pimagem" src="https://raw.githubusercontent.com/CubeBR/Cube-BR/master/cube%20br%20-%20capa%20-%202019.png"/>
+	<br>
+	<p class="Ptexto">Um bloco é a junção de 2 ou mais imagens em uma mesma linha!</p>
+	<br>
+	<div class="Pbloco">
+		<img class="Pimagem" src="https://raw.githubusercontent.com/CubeBR/Cube-BR/master/games/Sauerbraten.png"/>
+		<img class="Pimagem" src="https://raw.githubusercontent.com/CubeBR/Cube-BR/master/games/RedEclipse.png"/>
+	</div>
+</center>		
+<!-- fim -->
+		</textarea>
+		<p style="z-index: 2;color: grey;position: fixed;bottom: 5%;right: 40%;font-family: monospace;">Cube BR Post Editor by Salatiel#5274 | www.cubebr.com</p>
+	</body>
+
+</html>
