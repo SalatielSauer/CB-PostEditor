@@ -32,6 +32,12 @@ input:focus, textarea:focus, select:focus{
 	left: 15;
 }
 
+.textOptions {
+	z-index: 3;
+    background-color: #3e788c;
+    border-width: 2;
+}
+
 button {
 	cursor: pointer;
     background-color: #0000004d;
