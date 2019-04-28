@@ -1,6 +1,6 @@
 function propmenus(state) {
 	propmenu = document.getElementsByClassName("propmenu")[0];
-	if (state == 1){propmenu.show(); textoptdialog.close()} else {propmenu.close()};
+	if (state == 1){propmenu.showModal(); textoptdialog.close()} else {propmenu.close()};
 	
 	propTitle = document.getElementsByClassName("propTitle")[0];
 	propContent = document.getElementsByClassName("propContent")[0];
@@ -130,7 +130,7 @@ function previewpost(state){
 	previewpostDialog = document.getElementsByClassName("previewpost")[0];
 	previewpostDialog.innerHTML = '<button style="position: fixed;" onclick="previewpost(0)">Fechar</button>';
 	
-	if (state == 1){previewpostDialog.show()} else {previewpostDialog.close()};
+	if (state == 1){previewpostDialog.showModal()} else {previewpostDialog.close()};
 	
 	previewpostDialog.innerHTML += gettextarea();
 };
@@ -169,7 +169,7 @@ function showTextOptions(){
 		textoptdialog.style.left = event.clientX + 'px';
 		textoptdialog.style.right = 'unset';
 		textoptdialog.style.top = (event.clientY - 90) +'px';
-		textoptdialog.show();
+		textoptdialog.showModal();
 		setSelection(txtarea, getcursorpos(0), getcursorpos());
 	} else {textoptdialog.close()};
 }
@@ -227,4 +227,10 @@ function insertTab(o, e)
 		return false;
 	}
 	return true;
+};
+
+ window.onload = function() {
+	if (navigator.userAgent.indexOf("Firefox") > 0) {
+		alert("Sorry, Firefox does not fully support this tool by default. \n https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal#Browser_compatibility ");
+	}
 };
