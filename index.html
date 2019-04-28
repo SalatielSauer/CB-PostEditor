@@ -22,17 +22,19 @@
 			
 		</dialog>
 		<div class="postoptions">
-			<button onclick="savePost()"><i class="fas fa-save"></i> Salvar</button>
-			<button onclick="previewpost(1)"><i class="fas fa-eye"></i> Visualizar</button>
-			<button onclick="limparPost()"><i class="fas fa-trash"></i> Limpar</button>
+			<button title="Baixar postagem como um HTML" onclick="savePost()"><i class="fas fa-save"></i> Salvar</button>
+			<button title="Pré-visualizar postagem estilizada" onclick="previewpost(1)"><i class="fas fa-eye"></i> Visualizar</button>
+			<button title="Limpar postagem" onclick="limparPost()"><i class="fas fa-trash"></i> Limpar</button>
 		</div>
 		<div class="editoroptions">
-			<button onclick="addtitulo()"><i class="fas fa-heading"></i> Titulo</button>
-			<button onclick="addparagrafo()"><i class="fas fa-paragraph"></i> Páragrafo</button>
-			<button onclick="addimagem()"><i class="fas fa-image"></i> Imagem</button>
-			<button onclick="addvideo(0)"><i class="fas fa-video"></i> Vídeo</button>
-			<button onclick="addlista()"><i class="fas fa-list"></i> Lista</button>
-			<button onclick="addbloco()"><i class="fas fa-th-large"></i> Bloco</button>
+			<button title="Adicionar Titulo | <h3>" onclick="addtitulo()"><i class="fas fa-heading"></i> Titulo</button>
+			<button title="Adicionar Páragrafo | <p>" onclick="addparagrafo()"><i class="fas fa-paragraph"></i> Páragrafo</button>
+			<button title="Adicionar Hyperlink | <a>" onclick="addhyperlink()"><i class="fas fa-link"></i> Hyperlink</button>
+			<button title="Adicionar Imagem | <img>" onclick="addimagem()"><i class="fas fa-image"></i> Imagem</button>
+			<button title="Adicionar Vídeo do YouTube | <iframe>" onclick="addvideo(0)"><i class="fas fa-video"></i> Vídeo</button>
+			<button title="Adicionar Lista | <ul>" onclick="addlista()"><i class="fas fa-list"></i> Lista</button>
+			<button title="Adicionar imagens em uma mesma linha | <div>" onclick="addbloco()"><i class="fas fa-th-large"></i> Bloco</button>
+			<button title="Adicionar Rodapé da postagem" onclick="addrodape()"><i class="fas fa-grip-lines"></i> Rodapé</button>
 		</div>
 		
 		<textarea onkeydown="insertTab(this, event);" class="editorarea" spellcheck="false" autofocus="autofocus" tabindex="1" name="text" rows="20" wrap="off">
