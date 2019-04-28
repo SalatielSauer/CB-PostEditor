@@ -4,21 +4,26 @@ function propmenus(state) {
 	
 	propTitle = document.getElementsByClassName("propTitle")[0];
 	propContent = document.getElementsByClassName("propContent")[0];
-}
+};
 
 function gettextarea() {
 	txtarea = document.getElementsByClassName("editorarea")[0];
 	return txtarea.value
 };
 
-function getcursorpos() {
+function getcursorpos(t) {
 	txtarea = document.getElementsByClassName("editorarea")[0];
-	
-	return txtarea.selectionEnd;
+	if (t == 0){return txtarea.selectionStart} else {return txtarea.selectionEnd;}
 };
 
-function addelement(elementto) {
-    document.getElementsByClassName("editorarea")[0].value = gettextarea().substr(0, getcursorpos()) + '\n' + elementto + gettextarea().substr(getcursorpos());
+function removeselected() {
+	txtarea = document.getElementsByClassName("editorarea")[0];
+	
+	txtarea.value = txtarea.value.substr(0, getcursorpos(0)) + txtarea.value.substr(getcursorpos());
+};
+
+function addelement(elementto, index) {
+    document.getElementsByClassName("editorarea")[0].value = gettextarea().substr(0, index) + '\n' + elementto + gettextarea().substr(index);
 };
 
 
@@ -28,28 +33,31 @@ function getyoutubepic(){
 	vthumb = 'https://img.youtube.com/vi/' + purl + '/0.jpg';
 	urlembed = 'https://www.youtube.com/embed/' + purl;
 
-	document.getElementsByClassName("videothumb")[0].src = vthumb;
-}
+	if (purl){
+		document.getElementsByClassName("videothumb")[0].src = vthumb;
+		document.getElementsByClassName("videothumb")[0].style = 'display: unset';
+	};
+};
 
 function addvideo(state) {
 	if (typeof vthumb === undefined){vthumb = ""};
 	propmenus(1);
 	propTitle.innerHTML = '<p><i class="fas fa-video"></i> Adicionando Vídeo do YouTube</p>';
-	propContentl2 = '<center><img class="videothumb"/></center>';
+	propContentl2 = '<center><img class="videothumb" style="display: none;"/></center>';
 	propContent.innerHTML = '<div class="propLinha"> <p>URL: </p> <textarea onmouseout="getyoutubepic()" spellcheck="false" class="propTextarea"></textarea> <button onclick="addvideo(1)">Adicionar</button></div>' + propContentl2;
 
 	if (state == 1){
-		addelement('<iframe class="Pvideo" src="' + urlembed + '" frameborder="0" allowfullscreen></iframe>');
+		addelement('<iframe class="Pvideo" src="' + urlembed + '" frameborder="0" allowfullscreen></iframe>', getcursorpos());
 		propmenus(0);
 	}
-}
+};
 
 function addparagrafo() {
-	addelement('<p class="Ptexto">Insira o Páragrafo aqui</p>');
+	addelement('<p class="Ptexto">Insira o Páragrafo aqui</p>', getcursorpos());
 }
 
 function addtitulo() {
-	addelement('<h3 class="Ptitulo">Insira o Titulo aqui</h3>');
+	addelement('<h3 class="Ptitulo">Insira o Titulo aqui</h3>', getcursorpos());
 }
 
 function getimage(){
@@ -64,22 +72,32 @@ function addimagem(state) {
 	propContent.innerHTML = '<div class="propLinha"> <p>URL: </p> <textarea id="imagemurl" onmouseout="getimage()" spellcheck="false" class="propTextarea"></textarea>  <button onclick="addimagem(1)">Adicionar</button></div>' + propContentl2;
 
 	if (state == 1){
-		addelement('<img class="Pimagem" src="' + imglink.value + '"/>');
+		addelement('<img class="Pimagem" src="' + imglink.value + '"/>', getcursorpos());
 		propmenus(0);
 	};
 };
 
 function addlista() {
-	addelement('<ul class="Ullista">\n\t<li>Item um</li>\n\t<li>Item dois</li>\n\t<li>Item três</li>\n</ul>');
+	addelement('<ul class="Ullista">\n\t<li>Item um</li>\n\t<li>Item dois</li>\n\t<li>Item três</li>\n</ul>', getcursorpos());
 };
 
 function addbloco() {
-	addelement('<center>\n\t<div class="Pbloco">\n\t\t<img class="Pimagem" src="Insira Link para imagem 1 aqui"/>\n\t\t<img class="Pimagem" src="Insira Link para imagem 2 aqui"/>\n\t</div>\n</center>');
+	addelement('<center>\n\t<div class="Pbloco">\n\t\t<img class="Pimagem" src="Insira Link para imagem 1 aqui"/>\n\t\t<img class="Pimagem" src="Insira Link para imagem 2 aqui"/>\n\t</div>\n</center>', getcursorpos());
 };
 
 function limparPost() {
 	document.getElementsByClassName("editorarea")[0].value = "";
-}
+};
+
+function addrodape() {
+	addelement('<hr>\n<p style="color: white">Visite nosso <a href="http://discord.gg/J7EtPHA" target="_blank">canal no Discord</a>!</p>', getcursorpos());
+};
+
+function addhyperlink() {
+	selectedarea = document.getElementsByClassName("editorarea")[0].value.slice(getcursorpos(0), getcursorpos());
+	removeselected();
+	addelement('<a href="' + selectedarea + '" target="_blank"> Adicione titulo de Link aqui </a>', getcursorpos(0));
+};
 
 function previewpost(state){
 	previewpostDialog = document.getElementsByClassName("previewpost")[0];
@@ -102,14 +120,10 @@ function savePost(){
     downloadLink.innerHTML = "Download File";
     if (window.webkitURL != null)
     {
-        // Chrome allows the link to be clicked
-        // without actually adding it to the DOM.
         downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
     }
     else
     {
-        // Firefox requires the link to be added to the DOM
-        // before it can be clicked.
         downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
         downloadLink.onclick = destroyClickedElement;
         downloadLink.style.display = "none";
@@ -117,7 +131,7 @@ function savePost(){
     }
 
     downloadLink.click();
-}
+};
 
 // by sumtips.com
 function insertTab(o, e)
@@ -147,4 +161,4 @@ function insertTab(o, e)
 		return false;
 	}
 	return true;
-}
+};
