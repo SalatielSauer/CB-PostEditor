@@ -1,6 +1,6 @@
 function propmenus(state) {
 	propmenu = document.getElementsByClassName("propmenu")[0];
-	if (state == 1){propmenu.show()} else {propmenu.close()};
+	if (state == 1){propmenu.show(); textoptdialog.close()} else {propmenu.close()};
 	
 	propTitle = document.getElementsByClassName("propTitle")[0];
 	propContent = document.getElementsByClassName("propContent")[0];
@@ -13,17 +13,36 @@ function gettextarea() {
 
 function getcursorpos(t) {
 	txtarea = document.getElementsByClassName("editorarea")[0];
-	if (t == 0){return txtarea.selectionStart} else {return txtarea.selectionEnd;}
+	if (t == 0){return txtarea.selectionStart} else {return txtarea.selectionEnd};
+};
+
+function getselectedarea() {
+	return document.getElementsByClassName("editorarea")[0].value.slice(getcursorpos(0), getcursorpos());
+};
+
+function setSelection(ctrl, start, end){
+	ctrl.focus();
+	ctrl.setSelectionRange(start, end);
+};
+
+function setCaretPosition(ctrl, pos) {
+  if (ctrl.setSelectionRange) {
+    ctrl.focus();
+    ctrl.setSelectionRange(pos, pos);
+  }
 };
 
 function removeselected() {
+	oldcaretstart = getcursorpos(0);
 	txtarea = document.getElementsByClassName("editorarea")[0];
-	
 	txtarea.value = txtarea.value.substr(0, getcursorpos(0)) + txtarea.value.substr(getcursorpos());
+	setCaretPosition(txtarea, oldcaretstart);
 };
 
 function addelement(elementto, index) {
-    document.getElementsByClassName("editorarea")[0].value = gettextarea().substr(0, index) + '\n' + elementto + gettextarea().substr(index);
+	oldcaretend = getcursorpos();
+    document.getElementsByClassName("editorarea")[0].value = gettextarea().substr(0, index) + '' + elementto + gettextarea().substr(index);
+	setCaretPosition(txtarea, oldcaretend);
 };
 
 
@@ -52,12 +71,26 @@ function addvideo(state) {
 	}
 };
 
-function addparagrafo() {
-	addelement('<p class="Ptexto">Insira o Páragrafo aqui</p>', getcursorpos());
+function addparagrafo(t) {
+	if (t == 1){
+		var seltext = getselectedarea();
+		removeselected();
+		addelement('<p class="Ptexto">' + seltext + '</p>', getcursorpos());
+		textoptdialog.close();
+	} else {
+		addelement('<p class="Ptexto">Insira o Páragrafo aqui</p>', getcursorpos());
+	};
 }
 
-function addtitulo() {
-	addelement('<h3 class="Ptitulo">Insira o Titulo aqui</h3>', getcursorpos());
+function addtitulo(t) {
+	if (t == 1){
+		var seltext = getselectedarea();
+		removeselected();
+		addelement('<h3 class="Ptitulo">' + seltext + '</h3>', getcursorpos());
+		textoptdialog.close();
+	} else {
+		addelement('<h3 class="Ptitulo">Insira o Titulo aqui</h3>', getcursorpos());
+	};
 }
 
 function getimage(){
@@ -93,12 +126,6 @@ function addrodape() {
 	addelement('<hr>\n<p style="color: white">Visite nosso <a href="http://discord.gg/J7EtPHA" target="_blank">canal no Discord</a>!</p>', getcursorpos());
 };
 
-function addhyperlink() {
-	selectedarea = document.getElementsByClassName("editorarea")[0].value.slice(getcursorpos(0), getcursorpos());
-	removeselected();
-	addelement('<a href="' + selectedarea + '" target="_blank"> Adicione titulo de Link aqui </a>', getcursorpos(0));
-};
-
 function previewpost(state){
 	previewpostDialog = document.getElementsByClassName("previewpost")[0];
 	previewpostDialog.innerHTML = '<button style="position: fixed;" onclick="previewpost(0)">Fechar</button>';
@@ -108,6 +135,45 @@ function previewpost(state){
 	previewpostDialog.innerHTML += gettextarea();
 };
 
+/* Text Options */
+
+function addhyperlink() {
+	var seltext = getselectedarea();
+	removeselected();
+	if (seltext.includes("://www.")){
+		addelement('<a href="' + seltext + '" target="_blank"> Adicione titulo de Link aqui </a>', getcursorpos());
+	} else {
+		addelement('<a href="Adicione Link externo aqui" target="_blank">' + seltext + '</a>', getcursorpos());
+	};
+	textoptdialog.close();
+};
+
+function addstrong() {
+	var seltext = getselectedarea();
+	removeselected();
+	addelement('<strong>' + seltext + '</strong>', getcursorpos());
+	textoptdialog.close();
+};
+
+function additalic() {
+	var seltext = getselectedarea();
+	removeselected();
+	addelement('<i>' + seltext + '</i>', getcursorpos());
+};
+
+function showTextOptions(){
+	txtarea = document.getElementsByClassName("editorarea")[0];
+	textoptdialog = document.getElementsByClassName("textOptions")[0];
+	if (getselectedarea().length > 0){
+		textoptdialog.style.position = "fixed";
+		textoptdialog.style.left = event.clientX + 'px';
+		textoptdialog.style.right = 'unset';
+		textoptdialog.style.top = (event.clientY - 90) +'px';
+		textoptdialog.show();
+		setSelection(txtarea, getcursorpos(0), getcursorpos());
+	} else {textoptdialog.close()};
+}
+/* end */
 
 function savePost(){
 	txtarea = document.getElementsByClassName("editorarea")[0];
