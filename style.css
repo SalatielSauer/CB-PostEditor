@@ -172,6 +172,13 @@ img.Pimagem {
     flex-wrap: wrap;
 }
 
+@media screen and (max-width: 2800px) {
+	.Pbloco img {
+		width: 47%;
+		height: 100%;
+	}
+}
+
 .Pvideo {
     width: 102%;
     height: 500px;
