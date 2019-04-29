@@ -159,11 +159,11 @@ function additalic() {
 	var seltext = getselectedarea();
 	removeselected();
 	addelement('<i>' + seltext + '</i>', getcursorpos());
+	textoptdialog.close();
 };
 
 function showTextOptions(){
 	txtarea = document.getElementsByClassName("editorarea")[0];
-	textoptdialog = document.getElementsByClassName("textOptions")[0];
 	if (getselectedarea().length > 0){
 		textoptdialog.style.position = "fixed";
 		textoptdialog.style.left = event.clientX + 'px';
@@ -172,7 +172,7 @@ function showTextOptions(){
 		textoptdialog.show();
 		setSelection(txtarea, getcursorpos(0), getcursorpos());
 	} else {textoptdialog.close()};
-}
+};
 /* end */
 
 function savePost(){
@@ -230,6 +230,8 @@ function insertTab(o, e)
 };
 
  window.onload = function() {
+	textoptdialog = document.getElementsByClassName("textOptions")[0];	 
+
 	if (navigator.userAgent.indexOf("Firefox") > 0) {
 		alert("Sorry, Firefox does not fully support this tool by default. \n https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal#Browser_compatibility ");
 	}

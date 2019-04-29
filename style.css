@@ -8,7 +8,7 @@ input:focus, textarea:focus, select:focus{
     background-color: #132b33;
     border-style: none;
     resize: none;
-    color: white;
+    color: gainsboro;
     text-shadow: 0 0 1px black;
     padding: 15px;
     position: relative;
@@ -36,6 +36,15 @@ input:focus, textarea:focus, select:focus{
 	z-index: 3;
     background-color: #3e788c;
     border-width: 2;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px
+}
+
+.colorPicker {
+	z-index: 4;
+	position: absolute;
+	
 }
 
 button {
@@ -152,14 +161,15 @@ p.Ptexto {
 }
 
 img.Pimagem {
-    border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px;
+    /* border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;*/
     background-color: #1f364a;
-    padding: 7px;
+    padding: 7px; 
 }
 
 .Pbloco {
-    display: table;
+	display: inline-flex;
+    flex-wrap: wrap;
 }
 
 .Pvideo {
