@@ -105,7 +105,7 @@ function addimagem(state) {
 	propContent.innerHTML = '<div class="propLinha"> <p>URL: </p> <textarea id="imagemurl" onmouseout="getimage()" spellcheck="false" class="propTextarea"></textarea>  <button onclick="addimagem(1)">Adicionar</button></div>' + propContentl2;
 
 	if (state == 1){
-		addelement('<img class="Pimagem" src="' + imglink.value + '"/>', getcursorpos());
+		addelement('<center>\n\t<img class="Pimagem" src="' + imglink.value + '"/>\n</center>', getcursorpos());
 		propmenus(0);
 	};
 };
