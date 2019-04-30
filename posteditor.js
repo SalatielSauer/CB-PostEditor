@@ -1,3 +1,15 @@
+function saveundo(state){
+	txtarea = document.getElementsByClassName("editorarea")[0];
+	if (state == 1){txtareaundo = txtarea.value} else {txtarea.value = txtareaundo};
+};
+
+function undokey(e) {
+      var evtobj = window.event? event : e
+      if (evtobj.keyCode == 90 && evtobj.ctrlKey) {saveundo(0)};
+};
+
+document.onkeydown = undokey;
+
 function propmenus(state) {
 	propmenu = document.getElementsByClassName("propmenu")[0];
 	if (state == 1){propmenu.show(); textoptdialog.close()} else {propmenu.close()};
@@ -40,6 +52,7 @@ function removeselected() {
 };
 
 function addelement(elementto, index) {
+	saveundo(1);
 	oldcaretend = getcursorpos();
     document.getElementsByClassName("editorarea")[0].value = gettextarea().substr(0, index) + '' + elementto + gettextarea().substr(index);
 	setCaretPosition(txtarea, oldcaretend);
@@ -119,6 +132,7 @@ function addbloco() {
 };
 
 function limparPost() {
+	saveundo(1);
 	document.getElementsByClassName("editorarea")[0].value = "";
 };
 
