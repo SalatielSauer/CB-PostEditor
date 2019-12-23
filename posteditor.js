@@ -213,6 +213,11 @@ function savePost(){
     downloadLink.click();
 };
 
+/* Post */
+function playvideo(e){
+	e.innerHTML = '<iframe class="Pvideo" src="' + e.getAttribute("videosrc") + '" frameborder="0" allowfullscreen></iframe>';
+};
+
 // by sumtips.com
 function insertTab(o, e)
 {		
