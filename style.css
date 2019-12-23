@@ -186,6 +186,7 @@ img.Pimagem {
     background-color: black;
     margin-top: 7px;
     background-size: cover;
+    cursor: pointer;
 }
 
 ul.Ullista {
